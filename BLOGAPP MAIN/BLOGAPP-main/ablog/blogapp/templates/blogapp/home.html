@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Home</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    <a href="{% url 'blogapp:post_create' %}">Create New Post</a>
+    {% if posts %}
+    <ul>
+        {% for post in posts %}
+        <li>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.body }}</p>
+            <p>Posted by {{ post.author.username }} on {{ post.date_posted }}</p>
+            <a href="{% url 'blogapp:post_update' post.pk %}">Edit</a>
+            <a href="{% url 'blogapp:post_delete' post.pk %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No posts available.</p>
+    {% endif %}
+</body>
+</html>
